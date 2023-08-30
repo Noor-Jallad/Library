@@ -1,0 +1,11 @@
+import {Router} from 'express';
+import * as BookController from './Controller/Book.controller.js';
+import { auth } from '../../Middleware/auth.middleware.js';
+import { endPoint } from './Book.endPoint.js';
+const router= Router();
+router.get('/', auth(endPoint.get),BookController.getBooks);
+router.get('/:bookId', auth(endPoint.get),BookController.getSpecificBook);
+router.post('/', auth(endPoint.create),BookController.createBook);
+router.put('/:bookId', auth(endPoint.update),BookController.updateBook);
+router.delete('/:bookId', auth(endPoint.delete),BookController.deleteBook);
+export default router;
